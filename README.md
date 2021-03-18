@@ -12,6 +12,31 @@ Removing unwanted bookmarks in pdf table of contents toc;
 
     https://goo.gl/GpPt8l
     https://communities.sas.com/t5/ODS-and-Base-Reporting/How-to-delete-Extra-bookmark-of-the-pdf-file-using-proc-document/m-p/358174
+    
+    Recent addition
+
+    If you only want one level this will work
+
+    see
+    https://communities.sas.com/t5/SAS-Enterprise-Guide/Single-Level-PDF-Bookmark/m-p/727141
+
+    KSharp
+    https://communities.sas.com/t5/user/viewprofilepage/user-id/18408
+
+    ods pdf file="C:\temp\Myfile.pdf" style=journal;
+    ods proclabel="My Bookmark label";
+    data cars;
+     set sashelp.cars;
+     id=1;
+   run;
+   proc report data=cars contents="";
+    columns _all_;
+      define id/group noprint;
+    break before id / page contents="";
+   run;
+
+   ods pdf close;
+
 
     *                _     _
      _ __  _ __ ___ | |__ | | ___ _ __ ___
