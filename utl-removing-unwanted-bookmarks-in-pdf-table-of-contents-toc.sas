@@ -11,7 +11,29 @@ https://communities.sas.com/t5/ODS-and-Base-Reporting/Remove-empty-lines-proc-co
 https://goo.gl/GpPt8l
 https://communities.sas.com/t5/ODS-and-Base-Reporting/How-to-delete-Extra-bookmark-of-the-pdf-file-using-proc-document/m-p/358174
 
-*                _     _
+Recent addition by KSharp
+
+If you only want one level this will work
+
+KSharp
+https://communities.sas.com/t5/user/viewprofilepage/user-id/18408
+
+ods pdf file="C:\temp\Myfile.pdf" style=journal;
+ods proclabel="My Bookmark label";
+data cars;
+ set sashelp.cars;
+ id=1;
+run;
+  proc report data=cars contents="";
+    columns _all_;
+      define id/group noprint;
+    break before id / page contents="";
+  run;
+
+ods pdf close;
+
+
+*  Remove some levels  _
  _ __  _ __ ___ | |__ | | ___ _ __ ___
 | '_ \| '__/ _ \| '_ \| |/ _ \ '_ ` _ \
 | |_) | | | (_) | |_) | |  __/ | | | | |
